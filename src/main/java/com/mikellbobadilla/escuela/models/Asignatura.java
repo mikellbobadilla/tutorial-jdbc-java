@@ -1,13 +1,16 @@
-package com.mikellbobadilla.proyect;
+package com.mikellbobadilla.escuela.models;
 
-public class Profesor {
+
+public class Asignatura {
+
   private Long id;
   private String nombre;
-  private String apellidos;
+  private Long idProfesor;
 
-  public Profesor(String nombre, String apellidos) {
+  public Asignatura(Long id, String nombre, Long idProfesor) {
+    this.id = id;
     this.nombre = nombre;
-    this.apellidos = apellidos;
+    this.idProfesor = idProfesor;
   }
 
   public Long getId() {
@@ -26,20 +29,20 @@ public class Profesor {
     this.nombre = nombre;
   }
 
-  public String getApellidos() {
-    return apellidos;
+  public Long getIdProfesor() {
+    return idProfesor;
   }
 
-  public void setApellidos(String apellidos) {
-    this.apellidos = apellidos;
+  public void setIdProfesor(Long idProfesor) {
+    this.idProfesor = idProfesor;
   }
 
   @Override
   public String toString() {
-    return "Profesor{" +
+    return "Asignatura{" +
       "id=" + id +
       ", nombre='" + nombre + '\'' +
-      ", apellidos='" + apellidos + '\'' +
+      ", idProfesor=" + idProfesor +
       '}';
   }
 }

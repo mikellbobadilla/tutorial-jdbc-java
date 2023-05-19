@@ -1,11 +1,19 @@
-package com.mikellbobadilla.dao.mysql;
+package com.mikellbobadilla.escuela.DAO.alumnosDAO;
 
-import com.mikellbobadilla.dao.AsignaturaDAO;
-import com.mikellbobadilla.proyect.Asignatura;
+import com.mikellbobadilla.escuela.repositories.AsignaturaRepository;
+import com.mikellbobadilla.escuela.models.Asignatura;
 
+import java.sql.Connection;
 import java.util.List;
 
-public class MySQLAsinaturaDAO implements AsignaturaDAO {
+public class MySQLAsinaturaDAO implements AsignaturaRepository {
+
+    private Connection conn;
+
+    public MySQLAsinaturaDAO(Connection conn) {
+        this.conn = conn;
+    }
+
     @Override
     public void insertar(Asignatura a) {
 

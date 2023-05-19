@@ -1,6 +1,6 @@
-package com.mikellbobadilla.dao.mysql;
+package com.mikellbobadilla.escuela.exceptions;
 
-public class DAOException extends Exception{
+public class DAOException extends RuntimeException {
 
   public DAOException(String message) {
     super(message);

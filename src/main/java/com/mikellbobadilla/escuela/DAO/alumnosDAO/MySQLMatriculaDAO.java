@@ -1,12 +1,12 @@
-package com.mikellbobadilla.dao.mysql;
+package com.mikellbobadilla.escuela.DAO.alumnosDAO;
 
-import com.mikellbobadilla.dao.MatriculaDAO;
-import com.mikellbobadilla.proyect.Matricula;
+import com.mikellbobadilla.escuela.repositories.MatriculaRepository;
+import com.mikellbobadilla.escuela.models.Matricula;
 
 import java.sql.Connection;
 import java.util.List;
 
-public class MySQLMatriculaDAO implements MatriculaDAO {
+public class MySQLMatriculaDAO implements MatriculaRepository {
 
     private Connection conn;
 

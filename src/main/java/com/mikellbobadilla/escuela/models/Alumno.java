@@ -1,4 +1,4 @@
-package com.mikellbobadilla.proyect;
+package com.mikellbobadilla.escuela.models;
 
 import java.util.Date;
 
