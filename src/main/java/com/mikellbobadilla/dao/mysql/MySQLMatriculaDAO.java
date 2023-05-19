@@ -8,8 +8,6 @@ import java.util.List;
 
 public class MySQLMatriculaDAO implements MatriculaDAO {
 
-    final String INSERT = "INSERT INTO alumnos(id_alumno, nombre, apellido, fecha_nac)";
-
     private Connection conn;
 
     public MySQLMatriculaDAO(Connection conn){
