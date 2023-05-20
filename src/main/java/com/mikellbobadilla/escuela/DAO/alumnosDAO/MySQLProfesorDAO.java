@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLProfesorDAO implements ProfesorRepository {
@@ -19,7 +20,7 @@ public class MySQLProfesorDAO implements ProfesorRepository {
   final String GETONE = "SELECT id_profesor, nombre, apellidos FROM profesores WHERE id_profesor = ?";
 
 
-  private Connection conn;
+  private final Connection conn;
 
   public MySQLProfesorDAO(Connection conn) {
     this.conn = conn;
@@ -98,7 +99,7 @@ public class MySQLProfesorDAO implements ProfesorRepository {
   public List<Profesor> obtenerTodos() {
     PreparedStatement stat = null;
     ResultSet set = null;
-    List<Profesor> profesores = null;
+    List<Profesor> profesores = new ArrayList<>();
     try{
       stat = conn.prepareStatement(GETALL);
       set = stat.executeQuery();
@@ -129,16 +130,45 @@ public class MySQLProfesorDAO implements ProfesorRepository {
 
   @Override
   public Profesor obtener(Long id) {
-    return null;
+    PreparedStatement stat = null;
+    ResultSet rs = null;
+    Profesor profesor = null;
+    try{
+      stat =  conn.prepareStatement(GETONE);
+      rs = stat.executeQuery();
+      if(rs.next()){
+        profesor = convertir(rs);
+      }else {
+        throw new DAOException("No se encontró a este profesor");
+      }
+    } catch (SQLException e) {
+      throw new DAOException("Error en SQL.", e);
+    } finally {
+      if(stat != null){
+        try {
+          stat.close();
+        } catch (SQLException e) {
+          throw new DAOException("Error en SQL.", e);
+        }
+        if(rs != null){
+          try {
+            rs.close();
+          } catch (SQLException e) {
+            throw new DAOException("Error en SQL.", e);
+          }
+        }
+      }
+    }
+
+    return profesor;
   }
 
 
   private Profesor convertir(ResultSet set) throws SQLException {
-    Long id = set.getLong("id_profesor");
     String nombre = set.getString("nombre");
     String apellidos = set.getString("apellidos");
     Profesor p = new Profesor(nombre, apellidos);
-    p.setId(id);
+    p.setId(set.getLong("id_profesor"));
     return p;
   }
 }
